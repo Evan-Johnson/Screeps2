@@ -14,7 +14,7 @@ module.exports = {
         //max amounts of creeps per role initially
         var max_harvesters = 2;
         var max_upgraders = 4;
-        var max_builders = 1;
+        var max_builders = 2;
         var max_voyagers = 4;
         var max_recovery = 2;
         
@@ -115,7 +115,7 @@ module.exports = {
         } else if (current_energy >= 1000 && num_creeps.builder < max_builders && num_creeps.harvester >= max_harvesters) {
             spawny.spawnCreep(creep_components["builder"], "fat_bob" + Math.floor(Math.random() * 1000), {memory: {role: "builder"}});
             console.log("CAN WE FIX IT?!");
-        } else if (current_energy >= 250 && (Object.keys(Game.creeps).length < 2 || num_creeps.harvester < 1))
+        } else if (current_energy >= 250 && (Object.keys(Game.creeps).length < 2 || (num_creeps.harvester < 1 && num_creeps.recovery < max_recovery)))
         {
             spawny.spawnCreep(creep_components["harvester"], "recovery_harvey" + Math.floor(Math.random() * 1000), {memory: {role: "recovery"}});
             console.log("recovery unit in bound");
