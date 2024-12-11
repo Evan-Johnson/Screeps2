@@ -1,8 +1,9 @@
 var creepyControl = require('creepy_controller');
 var towerControl = require('tower_controller');
-const profiler = require('screeps-profiler');
+//const profiler = require('screeps-profiler');
 
 // This line monkey patches the global prototypes.
+/*
 profiler.enable();
 module.exports.loop = function() {
   profiler.wrap(function() {
@@ -10,7 +11,8 @@ module.exports.loop = function() {
     creepyControl.run(Game.spawns.SPAWNY);
   });
 }
-/*
+  */
+
 module.exports.loop = function () 
 {
     //run creep manager
@@ -23,4 +25,4 @@ module.exports.loop = function ()
        } 
     });
     */
-//};
+};
