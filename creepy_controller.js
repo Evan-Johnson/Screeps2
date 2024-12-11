@@ -12,10 +12,11 @@ module.exports = {
         var print = false;
         
         //max amounts of creeps per role initially
-        var max_harvesters = 4;
+        var max_harvesters = 2;
         var max_upgraders = 4;
         var max_builders = 1;
         var max_voyagers = 4;
+        var max_recovery = 2;
         
         //dictionary to keep track of the amount of each role
         var num_creeps = {
@@ -28,7 +29,7 @@ module.exports = {
         
         //creep_components will get higher and higher as more and more extensions are put in place
         var creep_components = { //1100 to spare at least, soon to be 1300 
-            //"fat_harvester": [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE], //1000 + 
+            "fat_harvester": [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE], //1000 + 
             "harvester": [WORK, MOVE, CARRY, CARRY], //250
             //"upgrader": [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE],  //1000 + 
             "builder": [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE],    //1000 + 
@@ -47,19 +48,19 @@ module.exports = {
             } else if (Game.creeps[name].memory.role == "bobby_builds") {
                 num_creeps.builder++;
                 roleBuilder.run(Game.creeps[name]);
-            } 
-            /*else if (Game.creeps[name].memory.role == "harvester")
+            } else if (Game.creeps[name].memory.role == "harvester")
             {
                 num_creeps.harvester++;
                 roleHarvester.run(Game.creeps[name], Game.spawns["SPAWNY"]);
-            } else if (Game.creeps[name].memory.role == "upgrader")
-            {
-                num_creeps.upgrader++;
-                roleUpgrader.run(Game.creeps[name]);
             } else if (Game.creeps[name].memory.role == "builder")
             {
                 num_creeps.builder++;
                 roleBuilder.run(Game.creeps[name]);
+            }
+            /*else if (Game.creeps[name].memory.role == "upgrader")
+            {
+                num_creeps.upgrader++;
+                roleUpgrader.run(Game.creeps[name]);
             } else if (Game.creeps[name].memory.role == 'voyager')
             {
                 num_creeps.voyager++;
@@ -97,11 +98,7 @@ module.exports = {
         
         //this is where the creeps are spawned if theyre are not enough current creeps in the room
         /*
-        if (current_energy >= 1000 && num_creeps.harvester < max_harvesters)
-        {
-            spawny.spawnCreep(creep_components["fat_harvester"], "fat_harvey" + Math.floor(Math.random() * 1000), {memory: {role: "harvester"}});
-            console.log("swear to god me too, no _____ Weinstein");
-        } else if (current_energy >= 1000 && num_creeps.builder < max_builders && num_creeps.harvester >= max_harvesters)
+        else if (current_energy >= 1000 && num_creeps.builder < max_builders && num_creeps.harvester >= max_harvesters)
         {
             spawny.spawnCreep(creep_components["builder"], "fat_bob" + Math.floor(Math.random() * 1000), {memory: {role: "builder"}});
             console.log("CAN WE FIX IT?!");
@@ -111,7 +108,14 @@ module.exports = {
             console.log("it smells like uppity in here");
         } else 
         */
-        if (current_energy >= 250 && (Object.keys(Game.creeps).length < 2 || num_creeps.recovery < 2))
+        if (current_energy >= 1000 && num_creeps.harvester < max_harvesters)
+        {
+            spawny.spawnCreep(creep_components["fat_harvester"], "fat_harvey" + Math.floor(Math.random() * 1000), {memory: {role: "harvester"}});
+            console.log("swear to god me too, no _____ Weinstein");
+        } else if (current_energy >= 1000 && num_creeps.builder < max_builders && num_creeps.harvester >= max_harvesters) {
+            spawny.spawnCreep(creep_components["builder"], "fat_bob" + Math.floor(Math.random() * 1000), {memory: {role: "builder"}});
+            console.log("CAN WE FIX IT?!");
+        } else if (current_energy >= 250 && (Object.keys(Game.creeps).length < 2 || num_creeps.recovery < max_recovery))
         {
             spawny.spawnCreep(creep_components["harvester"], "recovery_harvey" + Math.floor(Math.random() * 1000), {memory: {role: "recovery"}});
             console.log("recovery unit in bound");
