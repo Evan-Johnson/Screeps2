@@ -7,9 +7,11 @@ module.exports.loop = function ()
     //run creep manager
     creepyControl.run(Game.spawns.SPAWNY);
     
+    /*
     var tower_structure = Game.spawns.SPAWNY.room.find(FIND_STRUCTURES, {
        filter: (structure) => {
            return (structure.structureType == STRUCTURE_TOWER)
        } 
     });
+    */
 };
