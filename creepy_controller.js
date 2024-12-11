@@ -121,7 +121,7 @@ module.exports = {
         {
             spawny.spawnCreep(creep_components["harvester"], "recovery_harvey" + Math.floor(Math.random() * 1000), {memory: {role: "recovery"}});
             console.log("recovery unit in bound");
-        } else if (current_energy >= 250 && Object.keys(Game.creeps).length < 5)
+        } else if (current_energy >= 250 && Object.keys(Game.creeps).length < 3)
         {
             spawny.spawnCreep(creep_components["bobby_builds"], "recov_bob" + Math.floor(Math.random() * 1000), {memory: {role: "bobby_builds"}});
         }
