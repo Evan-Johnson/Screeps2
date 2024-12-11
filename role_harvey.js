@@ -13,10 +13,10 @@ module.exports = {
         
         if (creep.memory.twerking)
         {
-            if (return_loc1.energy < 300)
-                returnGold.run(creep, return_loc1);
-            else if (return_loc2 != null) 
+            if (return_loc2 != null) 
                 returnGold.run(creep, return_loc2);
+            else if (return_loc1.energy < 300)
+                returnGold.run(creep, return_loc1);
             else
                 returnGold.run(creep, return_loc3);
         } else
