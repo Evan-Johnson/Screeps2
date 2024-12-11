@@ -17,6 +17,7 @@ module.exports = {
         var max_builders = 2;
         var max_voyagers = 4;
         var max_recovery = 2;
+        var max_recovery_bob = 2;
         
         //dictionary to keep track of the amount of each role
         var num_creeps = {
@@ -24,7 +25,8 @@ module.exports = {
             harvester: 0,
             upgrader: 0,
             builder: 0,
-            voyager: 0
+            voyager: 0,
+            recovery_bob: 0
         };
         
         //creep_components will get higher and higher as more and more extensions are put in place
@@ -46,7 +48,7 @@ module.exports = {
                 num_creeps.recovery++;
                 roleHarvester.run(Game.creeps[name], Game.spawns["SPAWNY"]);
             } else if (Game.creeps[name].memory.role == "bobby_builds") {
-                num_creeps.builder++;
+                num_creeps.recovery_bob++;
                 roleBuilder.run(Game.creeps[name]);
             } else if (Game.creeps[name].memory.role == "harvester")
             {
