@@ -115,7 +115,7 @@ module.exports = {
         } else if (current_energy >= 1000 && num_creeps.builder < max_builders && num_creeps.harvester >= max_harvesters) {
             spawny.spawnCreep(creep_components["builder"], "fat_bob" + Math.floor(Math.random() * 1000), {memory: {role: "builder"}});
             console.log("CAN WE FIX IT?!");
-        } else if (current_energy >= 250 && (Object.keys(Game.creeps).length < 2 || num_creeps.recovery < max_recovery))
+        } else if (current_energy >= 250 && (Object.keys(Game.creeps).length < 2 || num_creeps.harvester < 1))
         {
             spawny.spawnCreep(creep_components["harvester"], "recovery_harvey" + Math.floor(Math.random() * 1000), {memory: {role: "recovery"}});
             console.log("recovery unit in bound");
