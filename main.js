@@ -1,6 +1,6 @@
 var creepyControl = require('creepy_controller');
 var towerControl = require('tower_controller');
-//const profiler = require('screeps-profiler');
+const profiler = require('screeps-profiler');
 
 // This line monkey patches the global prototypes.
 profiler.enable();
