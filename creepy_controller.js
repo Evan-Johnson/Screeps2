@@ -1,6 +1,7 @@
 var roleHarvester = require('role_harvey');
 //var roleUpgrader = require('role_uppity');
 var roleBuilder = require('role_bob');
+var roleTowerGuy = require('role_towerfella');
 //var roleVoyager = require('role_voyager');
 
 //add how many creeps total in dict
@@ -26,7 +27,8 @@ module.exports = {
             upgrader: 0,
             builder: 0,
             voyager: 0,
-            recovery_bob: 0
+            recovery_bob: 0,
+            tower_slave: 0
         };
         
         //creep_components will get higher and higher as more and more extensions are put in place
@@ -36,7 +38,8 @@ module.exports = {
             //"upgrader": [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE],  //1000 + 
             "builder": [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE],    //1000 + 
             //"voyager": [WORK, CARRY, MOVE, MOVE],
-            "bobby_builds": [WORK, MOVE, CARRY, CARRY]
+            "bobby_builds": [WORK, MOVE, CARRY, CARRY], //250
+            "tower_simp": [WORK, WORK, MOVE, CARRY, CARRY, CARRY] //350?
         };
         
         //loop to change max_creeps if necessary, count num of current creeps, and commit suicide
@@ -58,6 +61,9 @@ module.exports = {
             {
                 num_creeps.builder++;
                 roleBuilder.run(Game.creeps[name]);
+            } else if (Game.creeps[name].memory.role == "tower_simp") {
+                num_creeps.tower_slave++;
+                roleTowerGuy.run(Game.creeps[name]);
             }
             /*else if (Game.creeps[name].memory.role == "upgrader")
             {
@@ -124,6 +130,9 @@ module.exports = {
         } else if (current_energy >= 250 && Object.keys(Game.creeps).length < 3)
         {
             spawny.spawnCreep(creep_components["bobby_builds"], "recov_bob" + Math.floor(Math.random() * 1000), {memory: {role: "bobby_builds"}});
+        } else if (current_energy >= 450 && num_creeps.tower_slave < 1)
+        {
+            spawny.spawnCreep(creep_components["tower_simp"], "tower_boy" + Math.floor(Math.random() * 1000), {memory: {role: "tower_simp"}});
         }
         /*
         
