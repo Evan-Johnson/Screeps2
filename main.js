@@ -33,11 +33,16 @@ module.exports.loop = function ()
     //run creep manager
     creepyControl.run(Game.spawns.SPAWNY);
     
-    /*
+    
     var tower_structure = Game.spawns.SPAWNY.room.find(FIND_STRUCTURES, {
        filter: (structure) => {
            return (structure.structureType == STRUCTURE_TOWER)
        } 
     });
-    */
+
+    // run tower control
+    for (var i = 0; i < tower_structure.length; i++) {
+        towerControl.run(tower_structure[i], Game.spawns.SPAWNY);
+    }
+    
 };
