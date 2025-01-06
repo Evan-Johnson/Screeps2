@@ -64,10 +64,10 @@ module.exports = {
             } else if (Game.creeps[name].memory.role == "tower_simp") {
                 num_creeps.tower_slave++;
                 roleTowerGuy.run(Game.creeps[name]);
-            } else if (Game.creeps[name].memory.role == 'voyager') {
+            } /*else if (Game.creeps[name].memory.role == 'voyager') {
                 num_creeps.voyager++;
                 roleVoyager.run(Game.creeps[name], 'E12S49');
-            } 
+            } */
             /*else if (Game.creeps[name].memory.role == "upgrader")
             {
                 num_creeps.upgrader++;
@@ -128,9 +128,10 @@ module.exports = {
             spawny.spawnCreep(creep_components["bobby_builds"], "recov_bob" + Math.floor(Math.random() * 1000), {memory: {role: "bobby_builds"}});
         } else if (current_energy >= 450 && num_creeps.tower_slave < 1) {
             spawny.spawnCreep(creep_components["tower_simp"], "tower_boy" + Math.floor(Math.random() * 1000), {memory: {role: "tower_simp"}});
-        } else if (current_energy >= 700 && num_creeps.voyager < max_voyagers) {
+        }/* else if (current_energy >= 700 && num_creeps.voyager < max_voyagers) {
             spawny.spawnCreep(creep_components["voyager"], "voy" + Math.floor(Math.random() * 1000), {memory: {role: "voyager"}});
         }
+            */
         /*
         
         if (print)
