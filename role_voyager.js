@@ -1,4 +1,5 @@
 var newRoom = require('new_room');
+var getGold = require('get_gold');
 
 module.exports = {
     run: function(creep, room)
@@ -10,6 +11,8 @@ module.exports = {
 
         if (!creep.memory.rightRoom && !creep.memory.twerking) //needs to go to new room
             newRoom.run(creep, room);
-        else
-            console.log('Problem happening in voyage.');
+        else {
+            getGold.run(creep);
+        }
+
     }};
