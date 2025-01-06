@@ -16,7 +16,7 @@ module.exports = {
         var max_harvesters = 2;
         var max_upgraders = 4;
         var max_builders = 2;
-        var max_voyagers = 2;
+        var max_voyagers = 1;
         var max_recovery = 2;
         var max_recovery_bob = 2;
         
