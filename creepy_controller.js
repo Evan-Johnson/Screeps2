@@ -2,7 +2,7 @@ var roleHarvester = require('role_harvey');
 //var roleUpgrader = require('role_uppity');
 var roleBuilder = require('role_bob');
 var roleTowerGuy = require('role_towerfella');
-//var roleVoyager = require('role_voyager');
+var roleVoyager = require('role_voyager');
 
 //add how many creeps total in dict
 //run all functions
@@ -16,7 +16,7 @@ module.exports = {
         var max_harvesters = 2;
         var max_upgraders = 4;
         var max_builders = 2;
-        var max_voyagers = 4;
+        var max_voyagers = 1;
         var max_recovery = 2;
         var max_recovery_bob = 2;
         
@@ -37,7 +37,7 @@ module.exports = {
             "harvester": [WORK, MOVE, CARRY, CARRY], //250
             //"upgrader": [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE],  //1000 + 
             "builder": [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE],    //1000 + 
-            //"voyager": [WORK, CARRY, MOVE, MOVE],
+            "voyager": [WORK, CARRY, MOVE, MOVE, MOVE, MOVE], //350?
             "bobby_builds": [WORK, MOVE, CARRY, CARRY], //250
             "tower_simp": [WORK, WORK, MOVE, CARRY, CARRY, CARRY] //350?
         };
@@ -64,15 +64,14 @@ module.exports = {
             } else if (Game.creeps[name].memory.role == "tower_simp") {
                 num_creeps.tower_slave++;
                 roleTowerGuy.run(Game.creeps[name]);
-            }
+            } else if (Game.creeps[name].memory.role == 'voyager') {
+                num_creeps.voyager++;
+                roleVoyager.run(Game.creeps[name], 'E12S49');
+            } 
             /*else if (Game.creeps[name].memory.role == "upgrader")
             {
                 num_creeps.upgrader++;
                 roleUpgrader.run(Game.creeps[name]);
-            } else if (Game.creeps[name].memory.role == 'voyager')
-            {
-                num_creeps.voyager++;
-                roleVoyager.run(Game.creeps[name], 'W14N42');
             } 
             */
             else 
@@ -116,23 +115,21 @@ module.exports = {
             console.log("it smells like uppity in here");
         } else 
         */
-        if (current_energy >= 1000 && num_creeps.harvester < max_harvesters)
-        {
+        if (current_energy >= 1000 && num_creeps.harvester < max_harvesters) {
             spawny.spawnCreep(creep_components["fat_harvester"], "fat_harvey" + Math.floor(Math.random() * 1000), {memory: {role: "harvester"}});
             console.log("swear to god me too, no _____ Weinstein");
         } else if (current_energy >= 1000 && num_creeps.builder < max_builders && num_creeps.harvester >= max_harvesters) {
             spawny.spawnCreep(creep_components["builder"], "fat_bob" + Math.floor(Math.random() * 1000), {memory: {role: "builder"}});
             console.log("CAN WE FIX IT?!");
-        } else if (current_energy >= 250 && (Object.keys(Game.creeps).length < 2 || (num_creeps.harvester < 1 && num_creeps.recovery < max_recovery)))
-        {
+        } else if (current_energy >= 250 && (Object.keys(Game.creeps).length < 2 || (num_creeps.harvester < 1 && num_creeps.recovery < max_recovery))) {
             spawny.spawnCreep(creep_components["harvester"], "recovery_harvey" + Math.floor(Math.random() * 1000), {memory: {role: "recovery"}});
             console.log("recovery unit in bound");
-        } else if (current_energy >= 250 && Object.keys(Game.creeps).length < 3)
-        {
+        } else if (current_energy >= 250 && Object.keys(Game.creeps).length < 3) {
             spawny.spawnCreep(creep_components["bobby_builds"], "recov_bob" + Math.floor(Math.random() * 1000), {memory: {role: "bobby_builds"}});
-        } else if (current_energy >= 450 && num_creeps.tower_slave < 1)
-        {
+        } else if (current_energy >= 450 && num_creeps.tower_slave < 1) {
             spawny.spawnCreep(creep_components["tower_simp"], "tower_boy" + Math.floor(Math.random() * 1000), {memory: {role: "tower_simp"}});
+        } else if (current_energy >= 500 && num_creeps.voyager < 1) {
+            spawny.spawnCreep(creep_components["voyager"], "voy" + Math.floor(Math.random() * 1000), {memory: {role: "voyager"}});
         }
         /*
         
