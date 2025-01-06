@@ -5,7 +5,7 @@ var returnGold = require('return_gold');
 module.exports = {
     run: function(creep, room)
     {
-        var return_loc = creep.room.controller;
+        var ctrl = creep.room.controller;
 
         if (creep.pos.roomName == room)
             creep.memory.rightRoom = true;
@@ -15,6 +15,13 @@ module.exports = {
         if (!creep.memory.rightRoom && !creep.memory.twerking) //needs to go to new room
             newRoom.run(creep, room);
         else {
+            let reserveResult = creep.reserveController(ctrl);
+
+                if(reserveResult == ERR_NOT_IN_RANGE){
+
+                    creep.moveTo(ctrl);
+                }
+            /*
             if (creep.memory.twerking) {
                 returnGold.run(creep, return_loc);
 
@@ -25,6 +32,7 @@ module.exports = {
             } else {
                 getGold.run(creep);
             }
+            */
         }
 
     }};

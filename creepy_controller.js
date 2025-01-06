@@ -16,7 +16,7 @@ module.exports = {
         var max_harvesters = 2;
         var max_upgraders = 4;
         var max_builders = 2;
-        var max_voyagers = 1;
+        var max_voyagers = 2;
         var max_recovery = 2;
         var max_recovery_bob = 2;
         
@@ -37,7 +37,7 @@ module.exports = {
             "harvester": [WORK, MOVE, CARRY, CARRY], //250
             //"upgrader": [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE],  //1000 + 
             "builder": [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE],    //1000 + 
-            "voyager": [WORK, CARRY, MOVE, MOVE, MOVE, MOVE], //350?
+            "voyager": [CLAIM, MOVE, MOVE], //700?
             "bobby_builds": [WORK, MOVE, CARRY, CARRY], //250
             "tower_simp": [WORK, WORK, MOVE, CARRY, CARRY, CARRY] //350?
         };
@@ -128,7 +128,7 @@ module.exports = {
             spawny.spawnCreep(creep_components["bobby_builds"], "recov_bob" + Math.floor(Math.random() * 1000), {memory: {role: "bobby_builds"}});
         } else if (current_energy >= 450 && num_creeps.tower_slave < 1) {
             spawny.spawnCreep(creep_components["tower_simp"], "tower_boy" + Math.floor(Math.random() * 1000), {memory: {role: "tower_simp"}});
-        } else if (current_energy >= 500 && num_creeps.voyager < 1) {
+        } else if (current_energy >= 700 && num_creeps.voyager < max_voyagers) {
             spawny.spawnCreep(creep_components["voyager"], "voy" + Math.floor(Math.random() * 1000), {memory: {role: "voyager"}});
         }
         /*
